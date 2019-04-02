@@ -101,7 +101,7 @@ Following instruction is queted from [Cyber Dojo](http://www.cyber-dojo.org) :
 Run test with the following command :
 
 ```bash
-$ vendor/bin/phpunit
+$ vendor/bin/phpunit tests
 ```
 
 
@@ -115,5 +115,13 @@ Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Zend OPcache v7.2.15-0ubuntu0.18.10.2, Copyright (c) 1999-2018, by Zend Technologies
     with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
+```
+
+## Installation
+
+```bash
+$ git clone git://github.com/yokenzan/tdd_excercise.bowling_game.git
+$ cd tdd_excercise.bowling_game
+$ composer install --dev
 ```
 
