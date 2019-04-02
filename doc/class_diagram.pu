@@ -19,7 +19,7 @@ class "Frame" as frame {
 }
 
 class "Ball" as ball {
-    +pins()
+    +getPins() : int
 }
 
 class "Bonus" as bonus {
