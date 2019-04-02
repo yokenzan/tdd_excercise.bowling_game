@@ -1,3 +1,5 @@
+= # Bowling Game Score
+[2019-04-03 01:41]
 # Bowling Game Score
 
 ## Introduction
@@ -101,7 +103,7 @@ Following instruction is queted from [Cyber Dojo](http://www.cyber-dojo.org) :
 Run test with the following command :
 
 ```bash
-$ vendor/bin/phpunit tests
+$ vendor/bin/phpunit
 ```
 
 
