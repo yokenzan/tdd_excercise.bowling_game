@@ -16,7 +16,7 @@ class BallTest extends TestCase
     }
 
 
-    public function testShouldThrowsExceptionIfKnokedPinsAreGreaterThan10()
+    public function testShouldThrowExceptionIfKnokedPinsAreGreaterThan10()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
