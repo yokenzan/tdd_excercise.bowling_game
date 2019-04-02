@@ -32,4 +32,14 @@ class Frame
     {
         return $this->balls[$ball - 1]->getPins();
     }
+
+
+    public function getPins() : int
+    {
+        return array_reduce(
+            $this->balls,
+            function (int $sum, Ball $ball) { return $sum + $ball->getPins(); },
+            0
+        );
+    }
 }
