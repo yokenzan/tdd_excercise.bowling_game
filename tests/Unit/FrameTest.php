@@ -11,6 +11,8 @@ class FrameTest extends TestCase
 {
     public function testShouldThrowExceptionIfKnockedPinsOfBallsGreaterThan10()
     {
+        new Frame(new Ball(10), new Ball(0));
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'count of pins should be equel or less than 10'
@@ -52,5 +54,32 @@ class FrameTest extends TestCase
 
         $this->assertFalse($frame->isStrike());
         $this->assertTrue($frame->isSpare());
+    }
+
+
+    public function testScoreShouldBeEqualToKnokedPinsOfFrameIfIsNeigherSpareOrStrike()
+    {
+        $nextFrame = new Frame(new Ball(3), new Ball(2));
+        $thisFrame = new Frame(new Ball(5), new Ball(1), $nextFrame);
+
+        $this->assertEquals(5 + 1, $thisFrame->getScore());
+    }
+
+
+    public function testScoreShouldBeEqualToSumOfPinsCountOfThisFrameAndNextIfIsStrike()
+    {
+        $nextFrame = new Frame(new Ball(3),  new Ball(2));
+        $thisFrame = new Frame(new Ball(10), new Ball(0), $nextFrame);
+
+        $this->assertEquals(5 + 5 + 3 + 2, $thisFrame->getScore());
+    }
+
+
+    public function testScoreShouldBeEqualToSumOfPinsInThisFrameAndPinsOfFirstBallInNextFrameIfIsSpare()
+    {
+        $nextFrame = new Frame(new Ball(3), new Ball(2));
+        $thisFrame = new Frame(new Ball(6), new Ball(4), $nextFrame);
+
+        $this->assertEquals(6 + 4 + 3, $thisFrame->getScore());
     }
 }

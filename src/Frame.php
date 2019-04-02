@@ -54,4 +54,22 @@ class Frame
     {
         return !$this->isStrike() && $this->getPins() == 10;
     }
+
+
+    public function getScore() : int
+    {
+        return $this->next ? $this->next->calc($this) : $this->getPins();
+    }
+
+
+    protected function calc(self $previous) : int
+    {
+        if($previous->isSpare())
+            return $this->getPinsOf(1) + $previous->getPins();
+
+        if($previous->isStrike())
+            return $this->getScore()   + $previous->getPins();
+
+        return $previous->getPins();
+    }
 }
