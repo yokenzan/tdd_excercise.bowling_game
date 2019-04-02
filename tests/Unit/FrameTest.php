@@ -28,10 +28,29 @@ class FrameTest extends TestCase
         $this->assertEquals(3, $frame->getPinsOf(2));
     }
 
+
     public function testShouldReturnSumOfKnokedPins()
     {
         $frame = new Frame(new Ball(4), new Ball(3));
 
         $this->assertEquals(4 + 3, $frame->getPins());
+    }
+
+
+    public function testShouldBeStrikeIf10PinsKnokedInFirstBall()
+    {
+        $frame = new Frame(new Ball(10), new Ball(0));
+
+        $this->assertTrue($frame->isStrike());
+        $this->assertFalse($frame->isSpare());
+    }
+
+
+    public function testShouldBeSpareIfIsNotStrikeAnd10PinsKnokedInFrame()
+    {
+        $frame = new Frame(new Ball(3), new Ball(7));
+
+        $this->assertFalse($frame->isStrike());
+        $this->assertTrue($frame->isSpare());
     }
 }

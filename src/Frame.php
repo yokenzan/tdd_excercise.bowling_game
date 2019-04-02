@@ -42,4 +42,16 @@ class Frame
             0
         );
     }
+
+
+    public function isStrike() : bool
+    {
+        return $this->getPinsOf(1) == 10;
+    }
+
+
+    public function isSpare() : bool
+    {
+        return !$this->isStrike() && $this->getPins() == 10;
+    }
 }
