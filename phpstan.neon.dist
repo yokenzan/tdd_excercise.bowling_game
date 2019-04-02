@@ -1,0 +1,9 @@
+# vim:ft=yaml
+parameters:
+    autoload_files:
+        - vendor/autoload.php
+    level: max
+    paths:
+        - src/
+    file_extensions:
+        - php
