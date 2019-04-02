@@ -10,9 +10,9 @@ class "Game" as game {
 }
 
 class "Frame" as frame {
-    +score()
-    +pins()
-    #pinsOf(int $ball)
+    +getScore()
+    +getPins()
+    #getPinsOf(int $ball)
     --
     +isStrike()
     +isSpare()
