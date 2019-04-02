@@ -1,0 +1,20 @@
+{
+    "name": "cyrt/tdd_excercise.bowling_game",
+    "description": "excercise for Cyber Dojo's \"Bowling Game\" problem",
+    "authors": [
+        {
+            "name": "yokenzan",
+            "email": "31175068+yokenzan@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\": "src/",
+            "Tests\\": "tests/"
+        }
+    }
+}

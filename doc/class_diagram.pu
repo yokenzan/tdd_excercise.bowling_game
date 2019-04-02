@@ -1,0 +1,33 @@
+@startuml
+
+hide empty members
+skinparam shadowing    false
+skinparam packageStyle rect
+
+
+class "Game" as game {
+    +score()
+}
+
+class "Frame" as frame {
+    +score()
+    +pins()
+    #pinsOf(int $ball)
+    --
+    +isStrike()
+    +isSpare()
+}
+
+class "Ball" as ball {
+    +pins()
+}
+
+class "Bonus" as bonus {
+}
+
+game  o--  frame
+frame <|-- bonus
+frame o--  ball
+
+
+@enduml
