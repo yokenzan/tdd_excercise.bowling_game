@@ -7,6 +7,12 @@ use InvalidArgumentException;
 
 class BallParser
 {
+    public static function build() : self
+    {
+        return new self();
+    }
+
+
     public function parse(string $text, ?int $previous = 0) : Ball
     {
         if($text == '-') return Ball::generate(0);

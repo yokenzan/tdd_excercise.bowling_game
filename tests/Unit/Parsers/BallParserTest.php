@@ -22,6 +22,13 @@ class BallParserTest extends TestCase
     }
 
 
+    public function testShouldBeInstanciationableWithFactoryMehtod()
+    {
+        $instance = BallParser::build();
+        $this->assertEquals($this->parser, $instance);
+    }
+
+
     public function testParseBall()
     {
         $this->assertEquals(Ball::generate(1),  $this->parser->parse('1'));

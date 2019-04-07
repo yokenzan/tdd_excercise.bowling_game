@@ -13,6 +13,13 @@ class GameParser
      */
     private $frameParser;
 
+
+    public static function build() : self
+    {
+        return new self(FrameParser::build());
+    }
+
+
     public function __construct(FrameParser $frameParser)
     {
         $this->frameParser = $frameParser;
@@ -25,7 +32,6 @@ class GameParser
             self::SEPARATOR_FRAME,
             str_replace('||', FrameParser::SEPARATOR_BONUS, $text)
         );
-        var_dump($textFrames);
 
         $game = new Game();
 

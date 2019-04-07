@@ -15,6 +15,13 @@ class FrameParser
      */
     private $ballParser;
 
+
+    public static function build() : self
+    {
+        return new self(BallParser::build());
+    }
+
+
     public function __construct(BallParser $ballParser)
     {
         $this->ballParser = $ballParser;

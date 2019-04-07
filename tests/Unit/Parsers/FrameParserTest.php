@@ -21,7 +21,14 @@ class FrameParserTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->parser = new FrameParser(new BallParser());
+        $this->parser = new FrameParser(BallParser::build());
+    }
+
+
+    public function testShouldBeInstanciationableWithFactoryMehtod()
+    {
+        $instance = FrameParser::build();
+        $this->assertEquals($this->parser, $instance);
     }
 
 

@@ -6,7 +6,6 @@ use BowlingGame\Ball;
 use BowlingGame\Frame;
 use BowlingGame\FrameWithBonus;
 use BowlingGame\Game;
-use BowlingGame\Parsers\BallParser;
 use BowlingGame\Parsers\FrameParser;
 use BowlingGame\Parsers\GameParser;
 use PHPUnit\Framework\TestCase;
@@ -22,9 +21,14 @@ class GameParserTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->parser = new GameParser(
-            new FrameParser(new BallParser())
-        );
+        $this->parser = new GameParser(FrameParser::build());
+    }
+
+
+    public function testShouldBeInstanciationableWithFactoryMehtod()
+    {
+        $instance = GameParser::build();
+        $this->assertEquals($this->parser, $instance);
     }
 
 
