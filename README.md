@@ -1,5 +1,5 @@
-= # Bowling Game Score
-[2019-04-03 01:41]
+[![Build Status](https://travis-ci.org/yokenzan/tdd_excercise.bowling_game.svg?branch=master)](https://travis-ci.org/yokenzan/tdd_excercise.bowling_game)
+
 # Bowling Game Score
 
 ## Introduction

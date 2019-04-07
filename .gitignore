@@ -1,2 +1,4 @@
-/vendor
+vendor
 Session.vim
+doxygen/
+.phpunit.result.cache
