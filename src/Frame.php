@@ -16,20 +16,30 @@ class Frame
      */
     private $next;
 
-    function __construct(Ball $first, Ball $second, ?self $next = null)
+    function __construct(Ball $first, ?Ball $second = null)
     {
+        $second = $second ?? new Ball(0);
+
         if($first->getPins() + $second->getPins() > 10)
             throw new InvalidArgumentException(
                 'count of pins should be equel or less than 10'
             );
 
         $this->balls  = [$first, $second];
-        $this->next   = $next;
+    }
+
+
+    public function setNextFrame(self $next)
+    {
+        $this->next = $next;
     }
 
 
     public function getPinsOf(int $ball) : int
     {
+        if($ball < 1 && $ball > 2)
+            throw new InvalidArgumentException('ball index should be between 1 and 2');
+
         return $this->balls[$ball - 1]->getPins();
     }
 

@@ -11,7 +11,7 @@ class FrameTest extends TestCase
 {
     public function testShouldThrowExceptionIfKnockedPinsOfBallsGreaterThan10()
     {
-        new Frame(new Ball(10), new Ball(0));
+        new Frame(new Ball(10));
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -41,7 +41,7 @@ class FrameTest extends TestCase
 
     public function testShouldBeStrikeIf10PinsKnokedInFirstBall()
     {
-        $frame = new Frame(new Ball(10), new Ball(0));
+        $frame = new Frame(new Ball(10));
 
         $this->assertTrue($frame->isStrike());
         $this->assertFalse($frame->isSpare());
@@ -59,27 +59,33 @@ class FrameTest extends TestCase
 
     public function testScoreShouldBeEqualToKnokedPinsOfFrameIfIsNeigherSpareOrStrike()
     {
-        $nextFrame = new Frame(new Ball(3), new Ball(2));
-        $thisFrame = new Frame(new Ball(5), new Ball(1), $nextFrame);
+        $firstFrame = new Frame(new Ball(5), new Ball(1));
+        $nextFrame  = new Frame(new Ball(3), new Ball(2));
 
-        $this->assertEquals(5 + 1, $thisFrame->getScore());
+        $firstFrame->setNextFrame($nextFrame);
+
+        $this->assertEquals(5 + 1, $firstFrame->getScore());
     }
 
 
     public function testScoreShouldBeEqualToSumOfPinsCountOfThisFrameAndNextIfIsStrike()
     {
-        $nextFrame = new Frame(new Ball(3),  new Ball(2));
-        $thisFrame = new Frame(new Ball(10), new Ball(0), $nextFrame);
+        $firstFrame = new Frame(new Ball(10));
+        $nextFrame  = new Frame(new Ball(3),  new Ball(2));
 
-        $this->assertEquals(5 + 5 + 3 + 2, $thisFrame->getScore());
+        $firstFrame->setNextFrame($nextFrame);
+
+        $this->assertEquals(5 + 5 + 3 + 2, $firstFrame->getScore());
     }
 
 
     public function testScoreShouldBeEqualToSumOfPinsInThisFrameAndPinsOfFirstBallInNextFrameIfIsSpare()
     {
-        $nextFrame = new Frame(new Ball(3), new Ball(2));
-        $thisFrame = new Frame(new Ball(6), new Ball(4), $nextFrame);
+        $firstFrame = new Frame(new Ball(6), new Ball(4));
+        $nextFrame  = new Frame(new Ball(3), new Ball(2));
 
-        $this->assertEquals(6 + 4 + 3, $thisFrame->getScore());
+        $firstFrame->setNextFrame($nextFrame);
+
+        $this->assertEquals(6 + 4 + 3, $firstFrame->getScore());
     }
 }
