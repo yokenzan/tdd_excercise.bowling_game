@@ -6,7 +6,7 @@
 
 This repository is my source code for the solution of [Cyber Dojo](http://www.cyber-dojo.org)'s "Bowling Game" problem as a TDD excercise.
 
-## About Probrem
+## About Problem
 
 Following instruction is queted from [Cyber Dojo](http://www.cyber-dojo.org) :
 
@@ -98,12 +98,12 @@ Following instruction is queted from [Cyber Dojo](http://www.cyber-dojo.org) :
 >
 
 
-## Test
-
-Run test with the following command :
+## Installation
 
 ```bash
-$ vendor/bin/phpunit
+$ git clone git://github.com/yokenzan/tdd_excercise.bowling_game.git
+$ cd tdd_excercise.bowling_game
+$ composer install
 ```
 
 
@@ -119,11 +119,12 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
 ```
 
-## Installation
+
+## Test
+
+Run test with the following command :
 
 ```bash
-$ git clone git://github.com/yokenzan/tdd_excercise.bowling_game.git
-$ cd tdd_excercise.bowling_game
-$ composer install --dev
+$ vendor/bin/phpunit
 ```
 
