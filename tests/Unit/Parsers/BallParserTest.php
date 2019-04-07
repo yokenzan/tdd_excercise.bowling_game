@@ -43,6 +43,12 @@ class BallParserTest extends TestCase
     }
 
 
+    public function testParseEmptyBall()
+    {
+        $this->assertEquals(Ball::generate(0), $this->parser->parse('-'));
+    }
+
+
     public function testShouldThrowsExceptionIfArgumentIsInvalidFormat()
     {
         $this->expectException(InvalidArgumentException::class);
