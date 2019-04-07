@@ -13,8 +13,6 @@ class Frame implements IFrame
 
     /**
      * @var ?IFrame
-     *
-     * @throws  InvalidArgumentException
      */
     private $next;
 
@@ -97,13 +95,16 @@ class Frame implements IFrame
     }
 
 
-    protected function calc(self $previous) : int
+    public function calc(self $previous) : int
     {
         if($previous->isSpare())
             return $this->getPinsOf(1) + $previous->getPins();
 
         if($previous->isStrike())
-            return $this->getScore()   + $previous->getPins();
+            return $this->isStrike()
+                ? $this->getPins() + $previous->getPins() + $this->next->getPinsOf(1)
+                : $this->getPins() + $previous->getPins();
+
 
         return $previous->getPins();
     }

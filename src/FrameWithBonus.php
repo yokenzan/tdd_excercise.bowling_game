@@ -11,10 +11,30 @@ class FrameWithBonus implements IFrame
      */
     private $frames;
 
-    function __construct(Ball $first, ?Ball $second = null, ?Ball $bonus = null)
+    function __construct(Ball $first, Ball $second, ?Ball $third = null)
     {
+        $isStrike = $first->getPins() == 10;
+        $isSpare  = !$isStrike && $first->getPins() + $second->getPins() == 10;
+
+        if(!$isStrike && !$isSpare && func_num_args() == 3)
+            throw new InvalidException(
+                "neighter strike and spare frame doesn't have any bonus"
+            );
+
+        if($isStrike) {
+            $this->frames[] = new Frame($first);
+            $this->frames[] = new Frame($second);
+            $this->frames[] = new Frame($third);
+            return;
+        }
+
+        if($isSpare) {
+            $this->frames[] = new Frame($first, $second);
+            $this->frames[] = new Frame($third);
+            return;
+        }
+
         $this->frames[] = new Frame($first, $second);
-        $this->frames[] = new Frame($bonus ?? Ball::generate(0));
     }
 
 
@@ -26,7 +46,18 @@ class FrameWithBonus implements IFrame
         if($ball < 1 && $ball > 3)
             throw new InvalidArgumentException('ball index should be between 1 and 3');
 
-        return $this->frames[($ball - 1) / 2]->getPinsOf($ball % 2 ? 1 : 2);
+        if($ball == 1)
+            return $this->frames[0]->getPinsOf(1);
+
+        if($ball == 2)
+            return $this->frames[0]->isStrike()
+                ? $this->frames[1]->getPinsOf(1)
+                : $this->frames[0]->getPinsOf(2);
+
+        if($ball == 3)
+            return $this->frames[0]->isStrike()
+                ? $this->frames[1]->getPinsOf(2)
+                : $this->frames[1]->getPinsOf(1);
     }
 
 
@@ -80,20 +111,19 @@ class FrameWithBonus implements IFrame
     }
 
 
-    protected function calc(Frame $previous) : int
+    /**
+     * {@inheritDoc}
+     */
+    public function calc(Frame $previous) : int
     {
         if($previous->isSpare())
-            return $this->getPinsOf(1)          + $previous->getPins();
+            return $this->getPinsOf(1) + $previous->getPins();
 
         if($previous->isStrike())
-            return $this->getPinsWithoutBonus() + $previous->getPins();
+            return $this->isStrike()
+                ? $this->getPinsOf(1) + $this->getPinsOf(2) + $previous->getPins()
+                : $this->getPinsOf(1) + $previous->getPins();
 
         return $previous->getPins();
-    }
-
-
-    private function getPinsWithoutBonus() : int
-    {
-        return $this->frames[0]->getPins();
     }
 }

@@ -75,7 +75,7 @@ class FrameTest extends TestCase
 
         $firstFrame->setNextFrame($nextFrame);
 
-        $this->assertEquals(5 + 5 + 3 + 2, $firstFrame->getScore());
+        $this->assertEquals(10 + 3 + 2, $firstFrame->getScore());
     }
 
 
