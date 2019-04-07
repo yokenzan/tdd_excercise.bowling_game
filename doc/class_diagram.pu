@@ -9,7 +9,8 @@ class "Game" as game {
     +score()
 }
 
-class "Frame" as frame {
+
+interface "IFrame" as iframe {
     +getScore()
     +getPins()
     #getPinsOf(int $ball)
@@ -18,16 +19,22 @@ class "Frame" as frame {
     +isSpare()
 }
 
+class "Frame" as frame {
+    +calc(IFrame $previous)
+}
+class "FrameWithBonus" as frame_with_bonus {
+    +calc(IFrame $previous)
+}
+
 class "Ball" as ball {
     +getPins() : int
 }
 
-class "Bonus" as bonus {
-}
 
-game  o--  frame
-frame <|-- bonus
-frame o--  ball
+game   o--  iframe
+iframe <|-- frame
+iframe <|-- frame_with_bonus
+iframe o--  ball
 
 
 @enduml
