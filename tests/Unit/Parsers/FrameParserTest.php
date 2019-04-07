@@ -49,7 +49,7 @@ class FrameParserTest extends TestCase
             new FrameWithBonus(
                 Ball::generate(10), Ball::generate(10), Ball::generate(10)
             ),
-            $this->parser->parse('X||XX')
+            $this->parser->parse('X!XX')
         );
     }
 

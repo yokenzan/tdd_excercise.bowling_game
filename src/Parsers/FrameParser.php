@@ -8,7 +8,7 @@ use BowlingGame\IFrame;
 
 class FrameParser
 {
-    private const SEPARATOR_BONUS = '||';
+    public const SEPARATOR_BONUS = '!';
 
     /**
      * @var BallParser
