@@ -4,7 +4,7 @@ namespace BowlingGame;
 
 use InvalidArgumentException;
 
-class Frame
+class Frame implements IFrame
 {
     /**
      * @var Ball[]
@@ -12,10 +12,15 @@ class Frame
     private $balls;
 
     /**
-     * @var ?Frame
+     * @var ?IFrame
+     *
+     * @throws  InvalidArgumentException
      */
     private $next;
 
+    /**
+     * @throws  InvalidArgumentException
+     */
     function __construct(Ball $first, ?Ball $second = null)
     {
         $second = $second ?? new Ball(0);
@@ -29,12 +34,20 @@ class Frame
     }
 
 
-    public function setNextFrame(self $next)
+    /**
+     * {@inheritDoc}
+     */
+    public function setNextFrame(IFrame $next)
     {
         $this->next = $next;
     }
 
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws  InvalidArgumentException
+     */
     public function getPinsOf(int $ball) : int
     {
         if($ball < 1 && $ball > 2)
@@ -44,6 +57,9 @@ class Frame
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public function getPins() : int
     {
         return array_reduce(
@@ -54,18 +70,27 @@ class Frame
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public function isStrike() : bool
     {
         return $this->getPinsOf(1) == 10;
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public function isSpare() : bool
     {
         return !$this->isStrike() && $this->getPins() == 10;
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public function getScore() : int
     {
         return $this->next ? $this->next->calc($this) : $this->getPins();
