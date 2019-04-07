@@ -11,6 +11,13 @@ class Ball
      */
     private $pins;
 
+
+    public static function generate(int $pins) : self
+    {
+        return new self($pins);
+    }
+
+
     public function __construct(int $pins)
     {
         if($pins > 10)

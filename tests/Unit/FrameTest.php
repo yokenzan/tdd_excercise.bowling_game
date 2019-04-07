@@ -11,20 +11,20 @@ class FrameTest extends TestCase
 {
     public function testShouldThrowExceptionIfKnockedPinsOfBallsGreaterThan10()
     {
-        new Frame(new Ball(10));
+        new Frame(Ball::generate(10));
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'count of pins should be equel or less than 10'
         );
 
-        new Frame(new Ball(10), new Ball(10));
+        new Frame(Ball::generate(10), Ball::generate(10));
     }
 
 
     public function testShouldReturnCountOfKnokedPinsOfEachBall()
     {
-        $frame = new Frame(new Ball(4), new Ball(3));
+        $frame = new Frame(Ball::generate(4), Ball::generate(3));
 
         $this->assertEquals(4, $frame->getPinsOf(1));
         $this->assertEquals(3, $frame->getPinsOf(2));
@@ -33,7 +33,7 @@ class FrameTest extends TestCase
 
     public function testShouldReturnSumOfKnokedPins()
     {
-        $frame = new Frame(new Ball(4), new Ball(3));
+        $frame = new Frame(Ball::generate(4), Ball::generate(3));
 
         $this->assertEquals(4 + 3, $frame->getPins());
     }
@@ -41,7 +41,7 @@ class FrameTest extends TestCase
 
     public function testShouldBeStrikeIf10PinsKnokedInFirstBall()
     {
-        $frame = new Frame(new Ball(10));
+        $frame = new Frame(Ball::generate(10));
 
         $this->assertTrue($frame->isStrike());
         $this->assertFalse($frame->isSpare());
@@ -50,7 +50,7 @@ class FrameTest extends TestCase
 
     public function testShouldBeSpareIfIsNotStrikeAnd10PinsKnokedInFrame()
     {
-        $frame = new Frame(new Ball(3), new Ball(7));
+        $frame = new Frame(Ball::generate(3), Ball::generate(7));
 
         $this->assertFalse($frame->isStrike());
         $this->assertTrue($frame->isSpare());
@@ -59,8 +59,8 @@ class FrameTest extends TestCase
 
     public function testScoreShouldBeEqualToKnokedPinsOfFrameIfIsNeigherSpareOrStrike()
     {
-        $firstFrame = new Frame(new Ball(5), new Ball(1));
-        $nextFrame  = new Frame(new Ball(3), new Ball(2));
+        $firstFrame = new Frame(Ball::generate(5), Ball::generate(1));
+        $nextFrame  = new Frame(Ball::generate(3), Ball::generate(2));
 
         $firstFrame->setNextFrame($nextFrame);
 
@@ -70,8 +70,8 @@ class FrameTest extends TestCase
 
     public function testScoreShouldBeEqualToSumOfPinsCountOfThisFrameAndNextIfIsStrike()
     {
-        $firstFrame = new Frame(new Ball(10));
-        $nextFrame  = new Frame(new Ball(3),  new Ball(2));
+        $firstFrame = new Frame(Ball::generate(10));
+        $nextFrame  = new Frame(Ball::generate(3), Ball::generate(2));
 
         $firstFrame->setNextFrame($nextFrame);
 
@@ -81,8 +81,8 @@ class FrameTest extends TestCase
 
     public function testScoreShouldBeEqualToSumOfPinsInThisFrameAndPinsOfFirstBallInNextFrameIfIsSpare()
     {
-        $firstFrame = new Frame(new Ball(6), new Ball(4));
-        $nextFrame  = new Frame(new Ball(3), new Ball(2));
+        $firstFrame = new Frame(Ball::generate(6), Ball::generate(4));
+        $nextFrame  = new Frame(Ball::generate(3), Ball::generate(2));
 
         $firstFrame->setNextFrame($nextFrame);
 

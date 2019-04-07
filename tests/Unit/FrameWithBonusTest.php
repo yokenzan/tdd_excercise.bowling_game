@@ -17,13 +17,13 @@ class FrameWithBonusTest extends TestCase
             'count of pins should be equel or less than 10'
         );
 
-        new FrameWithBonus(new Ball(10), new Ball(10));
+        new FrameWithBonus(Ball::generate(10), Ball::generate(10));
     }
 
 
     public function testShouldReturnCountOfKnokedPinsOfEachBall()
     {
-        $frame = new FrameWithBonus(new Ball(4), new Ball(2), new Ball(6));
+        $frame = new FrameWithBonus(Ball::generate(4), Ball::generate(2), Ball::generate(6));
 
         $this->assertEquals(4, $frame->getPinsOf(1));
         $this->assertEquals(2, $frame->getPinsOf(2));
@@ -33,9 +33,9 @@ class FrameWithBonusTest extends TestCase
 
     public function testStrikeOrSpareShouldBeDeterminedByFirst2Balls()
     {
-        $spareFrame    = new FrameWithBonus(new Ball(4),  new Ball(6), new Ball(6));
-        $strikeFrame   = new FrameWithBonus(new Ball(10), new Ball(0), new Ball(6));
-        $ordinaryFrame = new FrameWithBonus(new Ball(4),  new Ball(2), new Ball(6));
+        $spareFrame    = new FrameWithBonus(Ball::generate(4),  Ball::generate(6), Ball::generate(6));
+        $strikeFrame   = new FrameWithBonus(Ball::generate(10), Ball::generate(0), Ball::generate(6));
+        $ordinaryFrame = new FrameWithBonus(Ball::generate(4),  Ball::generate(2), Ball::generate(6));
 
         $this->assertTrue($spareFrame    ->isSpare());
         $this->assertFalse($strikeFrame  ->isSpare());

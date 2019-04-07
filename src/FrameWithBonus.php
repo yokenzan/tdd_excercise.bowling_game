@@ -14,7 +14,7 @@ class FrameWithBonus implements IFrame
     function __construct(Ball $first, ?Ball $second = null, ?Ball $bonus = null)
     {
         $this->frames[] = new Frame($first, $second);
-        $this->frames[] = new Frame($bonus ?? new Ball(0));
+        $this->frames[] = new Frame($bonus ?? Ball::generate(0));
     }
 
 
@@ -80,9 +80,6 @@ class FrameWithBonus implements IFrame
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
     protected function calc(Frame $previous) : int
     {
         if($previous->isSpare())

@@ -8,10 +8,17 @@ use PHPUnit\Framework\TestCase;
 
 class BallTest extends TestCase
 {
+    public function testShouldBeInstanciationableWithFactoryMehtod()
+    {
+        $instance = Ball::generate(4);
+        $this->assertEquals(new Ball(4), $instance);
+    }
+
+
     public function testShouldReturnCountOfKnokedPins()
     {
         $pins   = 5;
-        $object = new Ball($pins);
+        $object = Ball::generate($pins);
         $this->assertEquals($pins, $object->getPins());
     }
 
@@ -24,7 +31,7 @@ class BallTest extends TestCase
         );
 
         $pins   = 11;
-        $object = new Ball($pins);
+        $object = Ball::generate($pins);
     }
 
 
@@ -36,6 +43,6 @@ class BallTest extends TestCase
         );
 
         $pins   = -1;
-        $object = new Ball($pins);
+        $object = Ball::generate($pins);
     }
 }
